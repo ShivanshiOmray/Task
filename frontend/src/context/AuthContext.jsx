@@ -2,6 +2,8 @@ import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
+
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
@@ -61,7 +63,7 @@ export const AuthProvider = ({ children }) => {
   const addToWishlist = async (item) => {
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/wishlist/add",
+        `${API_BASE_URL}/api/wishlist/add`,
         { item },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -74,7 +76,7 @@ export const AuthProvider = ({ children }) => {
   const removeFromWishlist = async (item) => {
     try {
       const res = await axios.post(
-        "http://localhost:8000/api/wishlist/remove",
+        `${API_BASE_URL}/api/wishlist/remove`,
         { item },
         { headers: { Authorization: `Bearer ${token}` } }
       );
